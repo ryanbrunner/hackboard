@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>comments_controller.rb</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="comments_controller.html">
+                comments_controller.rb
+              </a>
+            
+              
+              <a class="source" href="posts_controller.html">
+                posts_controller.rb
+              </a>
+            
+              
+              <a class="source" href="comment.html">
+                comment.rb
+              </a>
+            
+              
+              <a class="source" href="post.html">
+                post.rb
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
+    <ul class="sections">  
+        <li id="title">
+            <div class="annotation">
+                <h1>comments_controller.rb</h1>
+            </div>
+        </li>
+        
+           
+        <li id="section-1">
+            <div class="annotation">
+              <div class="pilwrap">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>            
+              
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>class CommentsController &lt; ApplicationController
+
+</pre></div></div>
+            
+        </li>
+        
+           
+        <li id="section-2">
+            <div class="annotation">
+              <div class="pilwrap">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>            
+              
+<p>Comments are nested within posts, so this will be called when
+a user calls /posts/1/comments with the POST verb.</p>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>  def create
+</pre></div></div>
+            
+        </li>
+        
+           
+        <li id="section-3">
+            <div class="annotation">
+              <div class="pilwrap">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>            
+              
+<p>Find our parent model by id. With nested resources, the &#39;parent&#39;
+associations are always referenced by <code>model_id</code>.</p>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>    post = Post.find(params[:post_id])
+
+</pre></div></div>
+            
+        </li>
+        
+           
+        <li id="section-4">
+            <div class="annotation">
+              <div class="pilwrap">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>            
+              
+<p>Use the association to create the comment. This is useful since we
+don&#39;t want to allow people to directly access the post_id on a comment.</p>
+
+            </div>
+            
+            <div class="content"><div class="highlight"><pre>    @comment = post.comments.build(params[:comment])
+
+    if @comment.save
+      redirect_to posts_path
+    else
+      render &#x27;new&#x27;
+    end
+  end
+
+end
+
+</pre></div></div>
+            
+        </li>
+        
+    </ul> 
+  </div>
+</body>
+</html>
