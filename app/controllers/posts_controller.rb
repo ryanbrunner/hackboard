@@ -6,7 +6,16 @@ class PostsController < ApplicationController
     # our view. This is important, since normally when you call `.comments`
     # on a post, Rails will make a call to the database. If you have a large
     # number of posts, this can cause a huge number of DB requests.
-    @posts = Post.includes(:comments).all
+    if params[:user_id]
+      @posts = Post.where(user_id: params[:user_id])
+    else
+      @posts = Post
+    end
+    @posts = @posts.includes(:comments)
+  end
+
+  def mine
+    render text: current_user.name
   end
 
   # Shows a form for creating a new post. Called when a GET request is sent to `/posts/new`

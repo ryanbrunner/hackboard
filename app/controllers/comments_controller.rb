@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   def create
     # Find our parent model by id. With nested resources, the 'parent'
     # associations are always referenced by `model_id`.
-    post = Post.find(params[:post_id])
+    post = Post.find(params[:comment].delete(:post_id))
 
     # Use the association to create the comment. This is useful since we
     # don't want to allow people to directly access the post_id on a comment.

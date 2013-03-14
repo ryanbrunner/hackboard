@@ -2,7 +2,7 @@
 class Comment < ActiveRecord::Base
   # Note that post_id is *not* accessible here. We don't want to allow users to switch
   # what post a comment is on.
-  attr_accessible :body
+  attr_accessible :body, :comment_id
 
   # Validate that a post exists. Note that we validate the association name rather than
   # `post_id`. This has the benefit of Rails checking whether the post *actually* exists,
