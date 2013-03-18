@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
 
+  before_filter :authenticate_user!
+
   # Lists all posts. Called when a GET request is sent to `/posts`
   def index
     # `includes` tells Rails what associations we're going to be using in
@@ -15,7 +17,8 @@ class PostsController < ApplicationController
   end
 
   def mine
-    render text: current_user.name
+    @posts = current_user.posts
+    render :index
   end
 
   # Shows a form for creating a new post. Called when a GET request is sent to `/posts/new`
@@ -28,7 +31,7 @@ class PostsController < ApplicationController
   def create
     # Remember, params stores everything sent to the server through form or
     # querystring data. By default, `form_for` will place your data in `params[:model_name]`
-    @post = Post.new(params[:post])
+    @post = current_user.posts.build(params[:post])
 
     # This idiom is very common in create and update actions. `save` will return
     # false if the record is invalid. We render `new` rather than redirecting so
