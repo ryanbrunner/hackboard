@@ -3,6 +3,8 @@
 # associations, and querying.
 class Post < ActiveRecord::Base
 
+  has_attached_file :image, styles: {small: '100x100>'}
+
   # attr_accessible is necessary to secure our models. When an attribute is present in
   # this list, you will be able to use it in a hash when creating or updating a model
   # - i.e. `Post.new(description: 'Test', link: 'http://www.test.com')`, or
@@ -11,7 +13,7 @@ class Post < ActiveRecord::Base
   # You can still use attributes not in attr_accessible when directly accessing attributes - i.e.
   # `post.some_other_variable = 3`. Generally, you should *not* include any variables that drive
   # associations (`comment_id`, etc.) in your attr_accessible.
-  attr_accessible :description, :link
+  attr_accessible :description, :link, :image
 
   # The `presence` validator validates that a field is not blank.
   validates :description, presence: true

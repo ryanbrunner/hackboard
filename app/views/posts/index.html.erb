@@ -4,6 +4,7 @@
 <% @posts.each do |p| %>
   <li>
     <div><%= p.description %></div>
+    <div><%= image_tag p.image.url(:small) %></div>
     <div>User: <%= p.user.email %></div>
     <div><%= link_to "Go!", p.link %></div>
 
